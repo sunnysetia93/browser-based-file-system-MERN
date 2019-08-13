@@ -14,5 +14,6 @@ code {
 
 html{
   background-image: linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)), url(./assets/check.jpg);  
+  /* background-color: rgb(134, 185, 233); */
   background-size: 25%;
 }

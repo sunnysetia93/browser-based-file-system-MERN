@@ -3,6 +3,16 @@ const mongoose = require('mongoose');
 const File = mongoose.model('File');
 const Folder = mongoose.model('Folder');
 
+route.get('/',async(req,res)=>{
+    try{
+        const file = await File.find({_user:req.user._id,_parentFolder:null})
+        return res.status(200).json(file);
+    }
+    catch(err){
+        res.status(401).json({error:true,message:'error retrieving file'});
+    }
+})
+
 route.get('/:id',async(req,res)=>{
     try{
         const id = req.params.id;
@@ -28,7 +38,7 @@ route.post("/",async(req,res)=>{
                 fileType:fileType,
                 extension:extension,
                 content:content,
-                _parentFolde:parentId,
+                _parentFolder:parentId,
                 _user:req.user
             })
 
