@@ -14,16 +14,16 @@ const Folder = mongoose.model('Folder');
         const fetchedUser = await User.findOneOrCreate({username:'sunnysetia'},onlyUser)
         console.log("Found/Created a default user!");
         
-        const now = Date.now();
-        const rootFolder = new Folder({
-            name:'root',
-            createdOn:now,
-            _user:fetchedUser,
-            _parentFolder:null
-        })
+        // const now = Date.now();
+        // const rootFolder = new Folder({
+        //     name:'root',
+        //     createdOn:now,
+        //     _user:fetchedUser,
+        //     _parentFolder:null
+        // })
         
-        Folder.findOneOrCreate({_parentFolder:null},rootFolder);
-        console.log("Found/Created a root folder!");
+        // Folder.findOneOrCreate({_parentFolder:null},rootFolder);
+        // console.log("Found/Created a root folder!");
         
     }
     catch(err){

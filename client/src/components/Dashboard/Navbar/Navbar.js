@@ -1,11 +1,12 @@
 import React from 'react';
 import './Navbar.css';
+import {Row} from 'react-bootstrap';
 const navbar = (props) => {
 
     return (
-        <div className="Navbar">
+        <Row className="Navbar">
 
-        </div>
+        </Row>
     )
 
 }

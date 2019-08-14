@@ -1,0 +1,18 @@
+.FolderLayout{
+    width: 4em;
+    height: 4em;
+    margin:10px;
+    text-align: center;
+}
+.Folder{
+    margin:0 auto;    
+    width: 3em;
+    height: 3em;
+    background-color:rgb(110, 174, 247);
+}
+
+.FolderName{
+    margin:0 auto;
+    padding-top:5px;
+    font-size: 12px;
+}

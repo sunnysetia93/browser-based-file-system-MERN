@@ -1,11 +1,13 @@
 const route = require('express').Router();
 const mongoose = require('mongoose');
 const Folder = mongoose.model('Folder');
+const File = mongoose.model('File');
 
 route.get('/', async (req,res)=>{
     try{
-        const folders = await Folder.find({_user:req.user._id,_parentFolder:null})
-        return res.status(200).json(folders);
+        const folders = await Folder
+                            .find({_user:req.user._id,_parentFolder:null})
+        return res.status(200).json({folders});
     }
     catch(err){
         res.status(401).json({error:true,message:'error retrieving folders'});
@@ -17,7 +19,15 @@ route.get('/:parentId', async (req,res)=>{
     try{
         const parentId = req.params.parentId;
         const folders = await Folder.find({_user:req.user._id,_parentFolder:parentId})
-        return res.status(200).json(folders);
+                                    .populate({
+                                        path : '_parentFolder',
+                                        populate : {
+                                          path : '_parentFolder'
+                                        }
+                                      })
+
+        const files = await File.find({_user:req.user._id,_parentFolder:parentId})
+        return res.status(200).json({folders,files});
     }
     catch(err){
         res.status(401).json({error:'error retrieving folders for this parent folder'});
@@ -30,10 +40,18 @@ route.post('/',async(req,res)=>{
         const folderName = req.body.name;
         const now = Date.now();
 
+        let parentFolder = null;
+        if(parentId!=null){
+            parentFolder = await Folder.findOne({_user:req.user._id,_id:parentId});
+            if(parentFolder==null){
+                return res.status(401).json({error:true,message:'error creating new folder'});        
+            }
+        }
+            
         const newFolder = new Folder({
             name:folderName,
             createdOn:now,
-            _parentFolder:parentId,
+            _parentFolder:parentFolder,
             _user:req.user
         })
 

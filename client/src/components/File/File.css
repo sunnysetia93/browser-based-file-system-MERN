@@ -1,0 +1,18 @@
+.FileLayout{
+    width: 4em;
+    height: 4em;
+    margin:10px;
+    text-align: center;
+}
+.File{
+    margin:0 auto;    
+    width: 3em;
+    height: 3em;
+    background-color:rgb(57, 103, 155);
+}
+
+.FileName{
+    margin:0 auto;
+    padding-top:5px;
+    font-size: 12px;
+}
