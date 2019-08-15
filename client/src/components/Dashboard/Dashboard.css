@@ -23,3 +23,15 @@
     width: 85%;
     height: 7%;
 }
+
+.ContextMenu{
+    background-color: grey;
+    color: white;
+    width: 5em;
+    height: 4em;
+    cursor: pointer;
+}
+
+.MenuItem{
+    margin-left:1em;
+}

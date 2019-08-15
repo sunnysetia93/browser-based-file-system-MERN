@@ -3,15 +3,15 @@ const mongoose = require('mongoose');
 const File = mongoose.model('File');
 const Folder = mongoose.model('Folder');
 
-route.get('/',async(req,res)=>{
-    try{
-        const files = await File.find({_user:req.user._id,_parentFolder:null})
-        return res.status(200).json(files);
-    }
-    catch(err){
-        res.status(401).json({error:true,message:'error retrieving file'});
-    }
-})
+// route.get('/',async(req,res)=>{
+//     try{
+//         const files = await File.find({_user:req.user._id,_parentFolder:null})
+//         return res.status(200).json(files);
+//     }
+//     catch(err){
+//         res.status(401).json({error:true,message:'error retrieving file'});
+//     }
+// })
 
 route.get('/:id',async(req,res)=>{
     try{
@@ -30,6 +30,7 @@ route.get('/:id',async(req,res)=>{
 route.post("/",async(req,res)=>{
     try{
         const {parentId,name,fileType,extension,content} = req.body;
+        console.log(parentId);
         let parentFolder = null;
         if(parentId!=null){
             parentFolder = await Folder.findOne({_id:parentId});
@@ -78,7 +79,7 @@ route.put('/',async(req,res)=>{
 route.delete('/',async(req,res)=>{
     try{
         const currId=req.body.id;
-
+        console.log(currId);
         const deletedCurrFile = await File.deleteOne({_id:currId,_user:req.user._id});
         if(deletedCurrFile.ok===0){
             return res.status(404).json({error:true,message:"cannot delete current file"});

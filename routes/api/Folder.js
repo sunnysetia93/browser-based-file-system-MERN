@@ -7,7 +7,8 @@ route.get('/', async (req,res)=>{
     try{
         const folders = await Folder
                             .find({_user:req.user._id,_parentFolder:null})
-        return res.status(200).json({folders});
+        const files = await File.find({_user:req.user._id,_parentFolder:null})
+        return res.status(200).json({folders,files});
     }
     catch(err){
         res.status(401).json({error:true,message:'error retrieving folders'});
@@ -87,21 +88,59 @@ route.put('/',async(req,res)=>{
 route.delete('/',async(req,res)=>{
     try{
         const currId=req.body.id;
-        const currFolder = await Folder.findOne({_id:currId,_user:req.user._id});
+        let foldersToBeDeleted = [];
+        let filesToBeDeleted = [];
+        
+        let currFolder = await Folder.findOne({_id:currId,_user:req.user._id});
         if(!currFolder)
             return res.status(404).json({error:true,message:"no folder to delete"});
+            
+            while((currFolder && !Array.isArray(currFolder)) || (Array.isArray(currFolder) && currFolder.length!=0)){
+                let children=[];
+                if(Array.isArray(currFolder)){
+                    for(let i=0;i<currFolder.length;i++){
+                        let parent = currFolder[i];
+                        foldersToBeDeleted.push(parent._id);
+                        let fetched = await Folder.find({_parentFolder:parent._id,_user:req.user._id});
+                        fetched!=null?children.push(...fetched):0;
 
-        const deleted = await Folder.deleteMany({_parentFolder:currId,_user:req.user._id});
-        console.log(deleted);
-        if(deleted.ok===0){
-            return res.status(404).json({error:true,message:"cannot delete subfolder and files"});
-        }
-        const deletedCurrFolder = await Folder.deleteOne({_id:currId,_user:req.user._id});
-        if(deletedCurrFolder.ok===0){
-            return res.status(404).json({error:true,message:"cannot delete current folder"});
-        }
+                        let fetchedFiles = await File.find({_parentFolder:parent._id,_user:req.user._id});
+                        fetchedFiles!=null?filesToBeDeleted.push(...fetchedFiles):0;
+                    }
+                }   
+                else{
+                    foldersToBeDeleted.push(currFolder._id);
+                    let fetched = await Folder.find({_parentFolder:currFolder._id,_user:req.user._id});
+                    fetched!=null?children.push(...fetched):0;
+
+                    let fetchedFiles = await File.find({_parentFolder:currFolder._id,_user:req.user._id});
+                    fetchedFiles!=null?filesToBeDeleted.push(...fetchedFiles):0;
+
+                }
+
+                currFolder=children;
+            }
+
+
+            for(let i=0;i<foldersToBeDeleted.length;i++){
+                let deleted = await Folder.deleteMany({_id:foldersToBeDeleted[i],_user:req.user._id});
+                if(deleted.ok==0){
+                    return res.status(404).json({error:true,message:"cannot delete subfolder and files"});
+                }
+            }
+
+            
+            for(let i=0;i<filesToBeDeleted.length;i++){
+                let deleted = await File.deleteMany({_id:filesToBeDeleted[i]._id,_user:req.user._id});
+                if(deleted.ok==0){
+                    return res.status(404).json({error:true,message:"cannot delete subfolder and files"});
+                }
+            }
+
+            console.log("all files deleted!");
+
+            return res.status(202).json({error:false,message:"Successfully deleted"})
         
-        return res.status(202).json({error:false,message:"Successfully deleted"})
     }
     catch(err){
         console.log(err);
