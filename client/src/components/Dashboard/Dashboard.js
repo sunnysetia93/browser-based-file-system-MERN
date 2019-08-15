@@ -126,15 +126,34 @@ class Dashboard extends Component {
     }
     onRenameSaveHandler = ()=>{
         if(this.state.renameFileType==="file"){
-            axios.put('/',{updatedName:this.state.rename,id:id})
+            axios.put('/file',{updatedName:this.state.rename,id:this.state.renameId})
                 .then(response=>{
                     const updatedFiles = this.state.files.map(file=>{
-                        // if(file.)
+                        if(file._id===this.state.renameId){
+                            file.name=this.state.rename;
+                        }
+                        return file;
+                    })
+
+                    this.setState({
+                        files:updatedFiles
                     })
                 })
         }
         else if(this.state.renameFileType==="folder"){
-
+            axios.put('/folder',{updatedName:this.state.rename,id:this.state.renameId})
+                .then(response=>{
+                    const updatedFolders = this.state.folders.map(folder=>{
+                        if(folder._id===this.state.renameId){
+                            folder.name=this.state.rename;
+                        }
+                        return folder;
+                    })
+                    
+                    this.setState({
+                        folders:updatedFolders
+                    })
+                })
         }
     }
     onDeleteClickHandler = (id,type)=>{
@@ -243,7 +262,7 @@ class Dashboard extends Component {
 
                 <Modal 
                     show={this.state.renameModalShow} 
-                    handleSave={this.props.addFile}
+                    handleSave={this.onRenameSaveHandler}
                     title="Rename"
                     label="Enter new title"
                     name={this.state.rename}
