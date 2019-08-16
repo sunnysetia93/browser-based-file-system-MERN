@@ -63,7 +63,7 @@ class Dashboard extends Component {
 
     backClickHandler = ()=>{
 
-        const pId = this.state.parentFolder==null?"":this.state.parentFolder._id
+        const pId = (this.state.parentFolder==null || this.state.parentFolder==undefined)?"":this.state.parentFolder._id
         axios.get('/folder/'+pId)
             .then((response)=>{
                 const {folders,files} = response.data;
@@ -120,8 +120,6 @@ class Dashboard extends Component {
     }
 
     onRenameClickHandler = (id,type)=>{
-        console.log("rename handler");
-        console.log(id,type);
         this.setState({
             renameModalShow:true,
             renameId:id,
@@ -168,7 +166,6 @@ class Dashboard extends Component {
             axios.delete("/file",{data:body})
                 .then((response)=>{
                     const updatedFiles = this.state.files.filter(file=>file._id!=id);
-                    console.log(updatedFiles);
                     this.setState({
                         files:updatedFiles
                     })
@@ -181,7 +178,6 @@ class Dashboard extends Component {
             axios.delete("/folder",{data:body})
                 .then(response=>{
                     const updatedFolders = this.state.folders.filter(folder=>folder._id!=id);
-                    console.log(updatedFolders);
                     this.setState({
                         folders:updatedFolders
                     })
