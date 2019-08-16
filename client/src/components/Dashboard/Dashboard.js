@@ -18,6 +18,7 @@ class Dashboard extends Component {
         files : [],
         parentFolder: null,
         currentFolderId:null,
+        currentFolderName:"",
         renameModalShow:false,
         rename:"",
         renameId:null,
@@ -41,6 +42,7 @@ class Dashboard extends Component {
 
     onClickFolder = (id)=>{
         const folder = this.state.folders.filter(folder=>folder._id===id);
+        console.log(folder);
         const parentFolder = folder[0]._parentFolder;
         axios.get('/folder/'+id)
             .then((response)=>{
@@ -49,7 +51,8 @@ class Dashboard extends Component {
                     folders:folders,
                     files:files,
                     parentFolder:parentFolder,
-                    currentFolderId:id
+                    currentFolderId:id,
+                    currentFolderName:folder[0].name
                 })
 
             })
@@ -70,7 +73,8 @@ class Dashboard extends Component {
                     folders:folders,
                     files:files,
                     parentFolder:parentFolder,
-                    currentFolderId:pId===""?null:pId
+                    currentFolderId:pId===""?null:pId,
+                    currentFolderName:pId===""?null:this.state.parentFolder.name
                 })
             })
             .catch(err=>{
@@ -230,13 +234,13 @@ class Dashboard extends Component {
                 return ( 
                 <React.Fragment key={file._id}>
                     <ContextMenuTrigger id={file._id}>
-                            <File name={file.name} clicked={()=>this.onClickFile(file._id)}/>
+                            <File name={file.name}/>
                     </ContextMenuTrigger>
                     <ContextMenu className="ContextMenu" id={file._id}>
                         <MenuItem onClick={()=>this.onRenameClickHandler(file._id,"file")} className="MenuItem">
                             Rename
                         </MenuItem>
-                        <MenuItem divider />
+                        <MenuItem divider/>
                         <MenuItem className="MenuItem" onClick={()=>this.onDeleteClickHandler(file._id,"file")}>
                             Delete
                         </MenuItem>
@@ -251,11 +255,8 @@ class Dashboard extends Component {
         return (
             <div className="Layout">
 
-                <Sidebar addFolder={this.onAddFolderHandler} addFile={this.onAddFileHandler}/>
-                <Navbar parentFolder={this.state.parentFolder}/>
-                <Row className="BackRow">
-                    <Button variant="primary" onClick={this.backClickHandler}>Back</Button>
-                </Row>
+                <Sidebar addFolder={this.onAddFolderHandler} addFile={this.onAddFileHandler} />
+                <Navbar currentFolder={this.state.currentFolderName} clicked={this.backClickHandler}/>
                 <Row className="FolderSection">
                     {updatedFilesFolders}
                 </Row>

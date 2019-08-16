@@ -4,9 +4,11 @@
     background: white;
     height: 38em;
     display: block;
+    border-radius: 5px;
     -webkit-box-shadow: -1px 2px 18px 1px rgba(255, 255, 255, 0.75);
     -moz-box-shadow: -1px 2px 18px 1px rgba(0,0,0,0.75);
     box-shadow: -1px 2px 18px 1px rgba(0,0,0,0.75);
+    
 }
 
 .FolderSection{
@@ -15,6 +17,7 @@
     height: 73%;
     width: 85%;
     background-color: white;
+    margin-top:1.5em;
 }
 
 .BackRow{
@@ -25,11 +28,20 @@
 }
 
 .ContextMenu{
-    background-color: grey;
-    color: white;
+    background-color: black;
+    color: #FFD07E;
     width: 5em;
     height: 4em;
     cursor: pointer;
+    padding-left:7px;
+    padding-top:4px;
+    font-size: 15px;
+    border-radius:4px;
+}
+.react-contextmenu-item--divider{
+    background: grey;
+    height: 1px;
+    padding: 0px;
 }
 
 .MenuItem{

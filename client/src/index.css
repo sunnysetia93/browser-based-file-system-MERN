@@ -5,6 +5,10 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* background-image: linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)), url(/static/media/check.55e4576a.jpg); */
+  background: #3f3f70;
+  background-size: 20%;
+
 }
 
 code {
@@ -12,8 +16,3 @@ code {
     monospace;
 }
 
-html{
-  background-image: linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)), url(./assets/check.jpg);  
-  /* background-color: rgb(134, 185, 233); */
-  background-size: 25%;
-}

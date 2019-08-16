@@ -1,6 +1,32 @@
 .Sidebar{
     float: left;
     width: 15%;
-    background-color: rgb(229, 226, 226);
+    background-color: #F8F7F7;
     height: 100%;
+}
+.Logo{
+    height:7.5em;
+    width: 100%;
+    margin:0px;
+}
+.LogoPulse{
+    font-size:6em;
+    margin:0 auto;
+    margin-top:0.2em;
+    color:#FD6864;
+}
+.ButtonRow{
+    height:7em;
+    width: 100%;
+    margin:0px;
+    text-align: center;
+}
+
+.SidebarButton{
+    margin:0 auto;
+    margin-top:2em;
+    width: 8em;
+    height: 3em;
+    color: #2f2f69;
+    /* background: #2f2f69; */
 }

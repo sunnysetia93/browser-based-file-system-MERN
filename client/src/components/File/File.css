@@ -1,18 +1,18 @@
 .FileLayout{
     width: 4em;
     height: 4em;
-    margin:10px;
+    /* margin:10px; */
+    padding-left:10px;
     text-align: center;
 }
 .File{
-    margin:0 auto;    
-    width: 3em;
-    height: 3em;
-    background-color:rgb(57, 103, 155);
+    padding-top:6px;
+    font-size:3em;
+    color:rgb(110, 174, 247);
 }
 
 .FileName{
     margin:0 auto;
-    padding-top:5px;
+    padding-left:10px;
     font-size: 12px;
 }

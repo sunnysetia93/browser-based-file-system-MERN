@@ -1,5 +1,7 @@
 import React,{Component} from 'react';
 import Modal from '../../Modal/Modal'
+import {Button,Row} from 'react-bootstrap';
+import {GiEuropeanFlag} from 'react-icons/gi'
 import './Sidebar.css';
 
 class Sidebar extends Component {
@@ -47,8 +49,13 @@ class Sidebar extends Component {
 
         return (
             <div className="Sidebar">
-                <button onClick={()=>this.toggleStatus(0)}>Create Folder</button>
-                <button onClick={()=>this.toggleStatus(1)}>Create File</button>
+                <Row className="Logo">
+                    <GiEuropeanFlag className="LogoPulse" />
+                </Row>
+                <Row className="ButtonRow">
+                    <Button className="SidebarButton" variant="outline-secondary" onClick={()=>this.toggleStatus(0)}>Create Folder</Button>
+                    <Button className="SidebarButton" variant="outline-secondary" onClick={()=>this.toggleStatus(1)}>Create File</Button>
+                </Row>
                 <Modal 
                     show={this.state.folderModalShow} 
                     handleSave={this.props.addFolder}
