@@ -11,15 +11,15 @@
   <li>to rename folders and fles</li>
 </ul>
 
-### How to run the project:
+### :computer: How to run the project:
 
 <ul>
   <li>Install necessary software: 
-    <ul>
+    <ol>
       <li> Nodejs: https://nodejs.org/en/download/ </li>
       <li> React: “npm i create-react-app” in your terminal </li>
       <li> MongoDB: https://docs.mongodb.com/manual/administration/install-community/ </li>
-    </ul>
+    </ol>
   </li>
   
   <li> Clone the project : <b>git clone https://github.com/sunnysetia93/browser-based-file-system-MERN</b> </li>
@@ -28,6 +28,13 @@
   <li> <b>cd ..</b> </li>
   <li> run <b>npm run dev</b> = This command will run the application and will redirect a new browser tab to <b>localhost:5000</b></li>
 </ul>
+
+### Screenshots:
+
+![main-screen](https://github.com/sunnysetia93/browser-based-file-system-MERN/blob/master/screenshots/3.screen2.PNG)
+![create-folder](https://github.com/sunnysetia93/browser-based-file-system-MERN/blob/master/screenshots/2.screen-2-%20create%20folder.PNG)
+![delete-rename](https://github.com/sunnysetia93/browser-based-file-system-MERN/blob/master/screenshots/4.delete-rename-onrightclick.PNG)
+
 
 ### :pushpin: Future Scope:
 <ul>
