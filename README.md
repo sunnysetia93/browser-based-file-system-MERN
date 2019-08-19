@@ -1,6 +1,6 @@
 # :file_folder: Browser-Based-File-System [MERN]
 
-<i>The project assignment is developed with an aim to practice/Revise MERN stack and to replicate a typical folder structure of Dropbox/Google Drive etc.</i>
+<i>The project assignment is developed with an aim to practice/Revise MERN stack and to replicate a typical folder structure of Dropbox/Google Drive or windows FS etc.</i>
 
 ### :point_right: Currently, The application allows:
 <ul>
