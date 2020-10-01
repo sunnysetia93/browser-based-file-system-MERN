@@ -16,11 +16,6 @@
   <li> run <b>npm run dev</b> = This command will run the application and will redirect a new browser tab to <b>localhost:5000</b></li>
 </ul>
 
-### :camera: Screenshots:
-
-![main-screen](https://github.com/sunnysetia93/browser-based-file-system-MERN/blob/master/screenshots/3.screen2.PNG)
-![create-folder](https://github.com/sunnysetia93/browser-based-file-system-MERN/blob/master/screenshots/2.screen-2-%20create%20folder.PNG)
-![delete-rename](https://github.com/sunnysetia93/browser-based-file-system-MERN/blob/master/screenshots/4.delete-rename-onrightclick.PNG)
 
 
 ### :star: Collabrations
